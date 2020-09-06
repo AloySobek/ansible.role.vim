@@ -1,0 +1,44 @@
+# File              : uninstall.yml
+# Author            : Rustam Khafizov <super.rustamm@gmail.com>
+# Date              : 06.09.2020
+# Last Modified Date: 06.09.2020
+# Last Modified By  : Rustam Khafizov <super.rustamm@gmail.com>
+
+---
+- name: uninstalling dependencies
+  become: true
+  apt:
+    name: "{{ item }}"
+    state: absent
+  loop: "{{ dependencies }}"
+  when: state == 'full_uninstall'
+
+- name: removing all vim files
+  become: true
+  shell:
+    cmd: "rm -rf {{ item }}"
+    warn: false
+  loop:
+    - "/etc/*vim*"
+    - "/usr/local/share/vim"
+    - "/usr/local/bin/*vim*"
+    - "/usr/local/share/man/*/*/*vim*"
+    - "/usr/local/share/man/*/*vim*"
+
+- name: removing all references from .vimrc from all users
+  become: true
+  shell: "sed -i '/vim_runtime/d' /home/*/.vimrc"
+  when: users == '--all'
+
+- name: removing all references from particular users
+  become: true
+  shell: "sed -i '/vim_runtime/d' /home/{{ item }}/.vimrc"
+  loop: "{{ users.split(' ') }}"
+  when: "users != '--all'"
+
+- name: clean after finish
+  become: true
+  apt:
+    autoremove: true
+    autoclean: true
+    force_apt_get: true

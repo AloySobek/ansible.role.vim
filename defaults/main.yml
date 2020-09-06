@@ -1,0 +1,18 @@
+# File              : main.yml
+# Author            : Rustam Khafizov <super.rustamm@gmail.com>
+# Date              : 06.09.2020
+# Last Modified Date: 06.09.2020
+# Last Modified By  : Rustam Khafizov <super.rustamm@gmail.com>
+
+---
+state: 'install'
+configure_opts: |
+  --with-features=huge                                    \
+  --enable-multibyte                                      \
+  --enable-rubyinterp=yes                                 \
+  --enable-python3interp=yes                              \
+  --with-python3-config-dir=$(python3-config --configdir) \
+  --enable-perlinterp=yes                                 \
+  --enable-cscope                                         \
+  --prefix=/usr/local                                     
+users: "--all"

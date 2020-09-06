@@ -1,0 +1,12 @@
+# File              : test.yml
+# Author            : Rustam Khafizov <super.rustamm@gmail.com>
+# Date              : 06.09.2020
+# Last Modified Date: 06.09.2020
+# Last Modified By  : Rustam Khafizov <super.rustamm@gmail.com>
+---
+- hosts: localhost
+  roles:
+    - ../../ansible.role.vim
+  vars:
+    users: "--all"
+    state: 'install'

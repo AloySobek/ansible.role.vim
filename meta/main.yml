@@ -1,0 +1,21 @@
+# File              : main.yml
+# Author            : Rustam Khafizov <super.rustamm@gmail.com>
+# Date              : 06.09.2020
+# Last Modified Date: 06.09.2020
+# Last Modified By  : Rustam Khafizov <super.rustamm@gmail.com>
+
+---
+galaxy_info:
+  author: AloySobek
+  description: Ansible role to install "The ultimate vim configuration"
+  company: self
+  license: MIT
+  min_ansible_version: 2.9
+  platforms:
+    - name: debian
+      versions:
+        - buster
+        - stretch
+  galaxy_tags:
+    - vim
+dependencies: []

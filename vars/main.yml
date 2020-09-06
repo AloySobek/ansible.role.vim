@@ -1,0 +1,64 @@
+# File              : main.yml
+# Author            : Rustam Khafizov <super.rustamm@gmail.com>
+# Date              : 06.09.2020
+# Last Modified Date: 06.09.2020
+# Last Modified By  : Rustam Khafizov <super.rustamm@gmail.com>
+
+---
+dependencies:
+  - gcc
+  - git
+  - python
+  - python3
+  - python-pip
+  - python3-pip
+  - libncurses-dev
+  - python-dev
+  - python3-dev
+  - ruby-dev
+  - libperl-dev
+  - ripgrep
+  - silversearcher-ag
+  - build-essential
+  - cmake
+  - golang
+
+other_vims:
+  - vim
+  - vim-runtime
+  - gvim
+  - vim-tiny
+  - vim-common
+  - vim-gui-common
+  - vim-nox
+
+plugins:
+  - url: "https://github.com/dracula/vim.git"
+    name: "dracula"
+    install_cmd: "echo 'stumb'"
+  - url: "https://github.com/hashivim/vim-vagrant.git"
+    name: "vagrant_highlight"
+    install_cmd: "echo 'stumb'"
+  - url: "https://github.com/hashivim/vim-terraform.git"
+    name: "terraform_highlight"
+    install_cmd: "echo 'stumb'"
+  - url: "https://github.com/ycm-core/YouCompleteMe.git"
+    name: YouCompleteMe
+    install_cmd: "python3 install.py"
+  - url: "https://github.com/junegunn/fzf.git"
+    name: fzf
+    install_cmd: "echo 'stumb'"
+  - url: "https://github.com/junegunn/fzf.vim.git"
+    name: fzf.vim
+    install_cmd: "echo 'stumb'"
+  - url: "https://github.com/yegappan/grep.git"
+    name: grep
+    install_cmd: "echo 'stumb'"
+  - url: "https://github.com/alpertuna/vim-header.git"
+    name: header
+    install_cmd: "echo 'stumb'"
+
+vimrc:
+  - "sed -i 's/colorscheme.*/colorscheme dracula/g' /usr/local/share/vim/vim82/vim_runtime/vimrcs/extended.vim"
+  - "sed -i \"s/let g:NERDTreeWinPos.*/let g:NERDTreeWinPos = 'left'/g\" /usr/local/share/vim/vim82/vim_runtime/vimrcs/plugins_config.vim"
+  

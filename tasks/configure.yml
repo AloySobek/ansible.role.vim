@@ -1,0 +1,73 @@
+# File              : configure.yml
+# Author            : Rustam Khafizov <super.rustamm@gmail.com>
+# Date              : 06.09.2020
+# Last Modified Date: 06.09.2020
+# Last Modified By  : Rustam Khafizov <super.rustamm@gmail.com>
+
+---
+- name: ensuring /etc/vim folder and /etc/vim/vimrc file exists
+  become: true
+  file:
+    path: "{{ item.path }}"
+    state: "{{ item.state }}"
+  loop:
+    - path: "/etc/vim"
+      state: directory
+    - path: /etc/vim/vimrc
+      state: touch
+
+- name: ensuring $VIM variable is set
+  become: true
+  lineinfile:
+    path: /etc/profile
+    line: export VIM=/etc/vim
+  notify:
+    - source profile
+
+- name: gathering stat about old vim configuration
+  become: true
+  stat:
+    path: "/usr/local/share/vim/vim82/vim_runtime"
+  register: vim_old
+
+- name: installing vim configuration
+  become: true
+  shell:
+    cmd: |
+      mv /tmp/vimrc /usr/local/share/vim/vim82/vim_runtime &&                  \
+      sh /usr/local/share/vim/vim82/vim_runtime/install_awesome_parameterized.sh \
+         /usr/local/share/vim/vim82/vim_runtime                                  \
+         {{ users }}
+    warn: false
+  when: not vim_old.stat.exists
+
+- name: downloading additional plugins for vim
+  become: true
+  git:
+    repo: "{{ item.url }}"
+    dest: "/usr/local/share/vim/vim82/vim_runtime/my_plugins/{{ item.name }}"
+  loop:  "{{ plugins }}"
+  register: downloaded
+
+- name: installing additional plugins for vim
+  become: true
+  shell: "cd /usr/local/share/vim/vim82/vim_runtime/my_plugins/{{ item.name }} && {{ item.install_cmd }}"
+  loop: "{{ plugins }}"
+  when: downloaded.changed
+
+- name: setting specific vimrc options
+  become: true
+  shell:
+    cmd: "{{ item }}"
+    warn: false
+  loop: "{{ vimrc }}"
+
+- name: setting basic vimrc options
+  become: true
+  lineinfile:
+    path: /etc/vim/vimrc
+    line: "{{ item }}"
+  loop:
+    - "set number"
+    - "set foldmethod=indent"
+    - "set foldlevel=99"
