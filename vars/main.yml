@@ -1,7 +1,7 @@
 # File              : main.yml
 # Author            : Rustam Khafizov <super.rustamm@gmail.com>
 # Date              : 06.09.2020
-# Last Modified Date: 06.09.2020
+# Last Modified Date: 07.09.2020
 # Last Modified By  : Rustam Khafizov <super.rustamm@gmail.com>
 
 ---
@@ -59,6 +59,7 @@ plugins:
     install_cmd: "echo 'stumb'"
 
 vimrc:
-  - "sed -i 's/colorscheme.*/colorscheme dracula/g' /usr/local/share/vim/vim82/vim_runtime/vimrcs/extended.vim"
-  - "sed -i \"s/let g:NERDTreeWinPos.*/let g:NERDTreeWinPos = 'left'/g\" /usr/local/share/vim/vim82/vim_runtime/vimrcs/plugins_config.vim"
-  
+  - "sed -i 's/colorscheme.*/colorscheme dracula/g'
+    /usr/local/share/vim/vim82/vim_runtime/vimrcs/extended.vim"
+  - "sed -i \"s/let g:NERDTreeWinPos.*/let g:NERDTreeWinPos =
+    'left'/g\" /usr/local/share/vim/vim82/vim_runtime/vimrcs/plugins_config.vim"

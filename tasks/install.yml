@@ -1,7 +1,7 @@
 # File              : install.yml
 # Author            : Rustam Khafizov <super.rustamm@gmail.com>
 # Date              : 06.09.2020
-# Last Modified Date: 06.09.2020
+# Last Modified Date: 07.09.2020
 # Last Modified By  : Rustam Khafizov <super.rustamm@gmail.com>
 
 ---
@@ -41,12 +41,15 @@
 - name: configuring vim compile
   become: true
   shell:
-    cmd: | 
+    cmd: |
       cd /tmp/vim && ./configure {{ configure_opts }}
     warn: false
 
 - name: installing vim
   become: true
   shell:
-    cmd: "cd /tmp/vim && make VIMRUNTIMEDIR=/usr/local/share/vim/vim82 && make install"
+    cmd: |
+      cd /tmp/vim                                   && \
+      make VIMRUNTIMEDIR=/usr/local/share/vim/vim82 && \
+      make install
     warn: false

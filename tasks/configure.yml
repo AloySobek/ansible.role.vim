@@ -1,7 +1,7 @@
 # File              : configure.yml
 # Author            : Rustam Khafizov <super.rustamm@gmail.com>
 # Date              : 06.09.2020
-# Last Modified Date: 06.09.2020
+# Last Modified Date: 07.09.2020
 # Last Modified By  : Rustam Khafizov <super.rustamm@gmail.com>
 
 ---
@@ -34,10 +34,10 @@
   become: true
   shell:
     cmd: |
-      mv /tmp/vimrc /usr/local/share/vim/vim82/vim_runtime &&                  \
+      mv /tmp/vimrc /usr/local/share/vim/vim82/vim_runtime && \
       sh /usr/local/share/vim/vim82/vim_runtime/install_awesome_parameterized.sh \
-         /usr/local/share/vim/vim82/vim_runtime                                  \
-         {{ users }}
+        /usr/local/share/vim/vim82/vim_runtime \
+        {{ users }}
     warn: false
   when: not vim_old.stat.exists
 
@@ -46,12 +46,16 @@
   git:
     repo: "{{ item.url }}"
     dest: "/usr/local/share/vim/vim82/vim_runtime/my_plugins/{{ item.name }}"
-  loop:  "{{ plugins }}"
+  loop: "{{ plugins }}"
   register: downloaded
 
 - name: installing additional plugins for vim
   become: true
-  shell: "cd /usr/local/share/vim/vim82/vim_runtime/my_plugins/{{ item.name }} && {{ item.install_cmd }}"
+  shell:
+    cmd: |
+      cd /usr/local/share/vim/vim82/vim_runtime/my_plugins/{{ item.name }} \
+      && {{ item.install_cmd }}
+    warn: false
   loop: "{{ plugins }}"
   when: downloaded.changed
 

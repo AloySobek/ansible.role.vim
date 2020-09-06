@@ -1,7 +1,7 @@
 # File              : main.yml
 # Author            : Rustam Khafizov <super.rustamm@gmail.com>
 # Date              : 06.09.2020
-# Last Modified Date: 06.09.2020
+# Last Modified Date: 07.09.2020
 # Last Modified By  : Rustam Khafizov <super.rustamm@gmail.com>
 
 ---
@@ -14,5 +14,5 @@ configure_opts: |
   --with-python3-config-dir=$(python3-config --configdir) \
   --enable-perlinterp=yes                                 \
   --enable-cscope                                         \
-  --prefix=/usr/local                                     
+  --prefix=/usr/local
 users: "--all"
