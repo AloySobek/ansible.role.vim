@@ -1,12 +1,7 @@
 # File              : main.yml
 # Author            : Rustam Khafizov <super.rustamm@gmail.com>
 # Date              : 06.09.2020
-# Last Modified Date: 06.09.2020
+# Last Modified Date: 12.09.2020
 # Last Modified By  : Rustam Khafizov <super.rustamm@gmail.com>
 
 ---
-- name: source profile
-  become: true
-  shell:
-    cmd: "source /etc/profile"
-    warn: false
