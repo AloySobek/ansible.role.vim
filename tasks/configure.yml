@@ -73,3 +73,11 @@
     - "set number"
     - "set foldmethod=indent"
     - "set foldlevel=99"
+
+- name: configuring vimrc for root user as well
+  become: true
+  copy:
+    src: "/home/{{ ansible_facts['env']['LOGNAME'] }}/.vimrc"
+    dest: "/root"
+    remote_src: true
+  when: for_root_as_well

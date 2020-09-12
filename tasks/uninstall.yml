@@ -1,7 +1,7 @@
 # File              : uninstall.yml
 # Author            : Rustam Khafizov <super.rustamm@gmail.com>
 # Date              : 06.09.2020
-# Last Modified Date: 06.09.2020
+# Last Modified Date: 12.09.2020
 # Last Modified By  : Rustam Khafizov <super.rustamm@gmail.com>
 
 ---
@@ -35,6 +35,11 @@
   shell: "sed -i '/vim_runtime/d' /home/{{ item }}/.vimrc"
   loop: "{{ users.split(' ') }}"
   when: "users != '--all'"
+
+- name: removing references from root user
+  become: true
+  shell: "sed -i '/vim_runtime/d' /root/.vimrc"
+  when: for_root_as_well
 
 - name: clean after finish
   become: true
